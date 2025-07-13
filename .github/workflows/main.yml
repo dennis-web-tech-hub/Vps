@@ -1,0 +1,28 @@
+bash
+#!/bin/bash
+
+Update and upgrade system
+apt update
+apt upgrade -y
+
+Update GRUB
+update-grub
+
+Pause for 2 seconds
+sleep 2
+
+Disable IPv6
+sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sysctl -w net.ipv6.conf.default.disable_ipv6=1
+
+Update package lists again
+apt update
+apt upgrade -y
+
+Install required packages
+apt install -y bzip2 gzip coreutils screen curl unzip
+
+Download and run external setup script
+wget -q https://raw.githubusercontent.com/Arya-Blitar22/single/main/setup.sh
+chmod +x setup.sh
+./setup.sh
